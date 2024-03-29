@@ -2,7 +2,6 @@ import { Container, Divider, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { pizzaList } from '../apis/pizzaApi';
 import { Pizza, PizzaBase, PizzaSize } from '../apis/types';
-import { useRoutes } from 'react-router-dom';
 
 const Cart = () => {
   const [cartList, setCartList] = useState<Pizza[]>([]);
@@ -25,17 +24,16 @@ const Cart = () => {
             item.orderId = Math.floor(Math.random() * 1000);
           }
         });
-      console.log(copyofOrder);
       if (localStorage.getItem('order')) {
         // @ts-ignore
         const orderList = JSON.parse(localStorage.getItem('order'));
         setOrder([...orderList, ...copyofOrder]);
       }
       setOrder([...copyofOrder]);
-      console.log('Order', order);
       if (order.length < 10) {
         localStorage.setItem('order', JSON.stringify(copyofOrder));
         localStorage.setItem('carts', '');
+        alert("order successfully")
       } else {
         alert('you cant order more than 10');
       }
@@ -47,10 +45,8 @@ const Cart = () => {
     const updatedPizzaList = cartList.map((pizzaItem) => {
       if (pizzaItem.size !== selectedSize) {
         // Update the base property for the selected pizza
-        console.log('work');
         return { ...pizzaItem, size: selectedSize };
       }
-      console.log(pizzaItem);
       return pizzaItem;
     });
     setCartList(updatedPizzaList);
@@ -61,10 +57,8 @@ const Cart = () => {
     const updatedPizzaList = cartList.map((pizzaItem) => {
       if (pizzaItem.base !== selectedBase) {
         // Update the base property for the selected pizza
-        console.log('work');
         return { ...pizzaItem, base: selectedBase };
       }
-      console.log(pizzaItem);
       return pizzaItem;
     });
     setCartList(updatedPizzaList);

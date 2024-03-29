@@ -1,4 +1,4 @@
-import { Button, Container, Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Pizza, PizzaStage } from '../apis/types';
 
@@ -10,7 +10,6 @@ const TrackOrder = () => {
       const orderList = JSON.parse(localStorage.getItem('order'));
       setOrder([...orderList]);
     }
-    console.log('Order', order);
   }, []);
   useEffect(() => {
     if (order.length > 0) {
@@ -34,7 +33,7 @@ const TrackOrder = () => {
   //@ts-ignore
   const updatePizzaStage = (orderId, action) => {
     const updatedPizzas = order?.map((pizza) => {
-      if (pizza.id === orderId) {
+      if (pizza.orderId === orderId) {
         let newStage: PizzaStage = pizza.stage;
         if (action === 'next') {
           switch (pizza.stage) {
@@ -78,7 +77,6 @@ const TrackOrder = () => {
               'Order in Making': timeSpent - pizzaSizes[order?.size],
               'Order Ready': timeSpent - pizzaSizes[order?.size] - 60, // 1 minute for preparation
               'Order Picked': timeSpent - pizzaSizes[order?.size] - 60 - 120, // 2 minutes for delivery
-              'Cancelled': timeSpent,
             };
             // Determine if the pizza is overdue
             //@ts-ignore
@@ -88,39 +86,57 @@ const TrackOrder = () => {
               <>
                 <div className='orderId_box'>Order Id: {order?.orderId}</div>
                 <Grid item xs={12}>
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{ display: 'flex', justifyContent: 'space-between' }}
+                  >
+                    <p>
+                      <strong>name:</strong>
+                      {order?.name}
+                    </p>
+                    <p>
+                      <strong>type:</strong>
+                      {order?.pizzaType}
+                    </p>
+                    <p>
+                      <strong>size:</strong>
+                      {order?.size}
+                    </p>
+                    <p>
+                      <strong>base:</strong>
+                      {order?.base}
+                    </p>
+                    <p>
+                      <strong>price:</strong>
+                      {order?.price}
+                    </p>
+                  </Grid>
+
                   <div className='stage_card'>
                     <p>{order?.stage}</p>
                     {/* @ts-ignore */}
-                    <p className={`time_S ${isOverdue ? 'red' : ''}`}>
+                    <p className={`${isOverdue ? 'red' : ''}`}>
                       Time spent in {order?.stage}:{' '}
                       {/* @ts-ignore */}
                       {formatTime(timeInStage[order?.stage])}
                     </p>
-                    <div>
-                      {order?.stage !== 'Order Ready' && (
-                        <Button
-                          variant='outlined'
-                          color='secondary'
-                          sx={{ mx: 1 }}
-                          onClick={() =>
-                            updatePizzaStage(order?.orderId, 'next')
-                          }
-                        >
-                          Next
-                        </Button>
-                      )}
-                      {order?.stage !== 'Order Ready' && (
-                        <Button
-                          variant='contained'
-                          color='error'
-                          onClick={() =>
-                            updatePizzaStage(order?.orderId, 'cancel')
-                          }
-                        >
-                          Cancel
-                        </Button>
-                      )}
-                    </div>
+                    {order?.stage !== 'Order Ready' && (
+                      <button
+                        onClick={() => updatePizzaStage(order?.orderId, 'next')}
+                      >
+                        Next
+                      </button>
+                    )}
+                    {order?.stage !== 'Order Ready' && (
+                      <button
+                        onClick={() =>
+                          updatePizzaStage(order?.orderId, 'cancel')
+                        }
+                      >
+                        Cancel
+                      </button>
+                    )}
                   </div>
                 </Grid>
               </>

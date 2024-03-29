@@ -7,10 +7,6 @@ const Home = () => {
   //   @ts-ignore
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
   const [cartList, setCartList] = useState<Pizza[]>([]);
-  const [base, setBase] = useState<PizzaBase | null>('Thick');
-  const [size, setSize] = useState<PizzaSize | null>('Medium');
-  console.log(base, size);
-  console.log(pizzas, 'pizzaList');
 
   useEffect(() => {
     if (pizzaList.length > 0) {
@@ -40,29 +36,23 @@ const Home = () => {
   };
   const handlePizzaSize = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSize: PizzaSize = e.target.value as PizzaSize;
-    setSize(selectedSize);
     const updatedPizzaList = pizzas.map((pizzaItem) => {
       if (pizzaItem.size !== selectedSize) {
         // Update the base property for the selected pizza
-        console.log('work');
         return { ...pizzaItem, size: selectedSize };
       }
-      console.log(pizzaItem);
       return pizzaItem;
     });
     setPizzas(updatedPizzaList);
   };
   const handlePizzaBase = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedBase: PizzaBase = e.target.value as PizzaBase;
-    setBase(selectedBase);
 
     const updatedPizzaList = pizzas.map((pizzaItem) => {
       if (pizzaItem.base !== selectedBase) {
         // Update the base property for the selected pizza
-        console.log('work');
         return { ...pizzaItem, base: selectedBase };
       }
-      console.log(pizzaItem);
       return pizzaItem;
     });
     setPizzas(updatedPizzaList);

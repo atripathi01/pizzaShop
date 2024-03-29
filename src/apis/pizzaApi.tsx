@@ -11,6 +11,7 @@ export const pizzaList =[
         stage: "Order Placed",
         description: "Pizza 1 Description",
         pizzaType: "Veg",
+        
     },
     {
         id: 2,
