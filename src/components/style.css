@@ -1,0 +1,106 @@
+/* navbar style */
+
+.navbar{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.navbar-title{
+    font-size: 1.5rem;
+    font-weight: 700;   
+}
+
+.options_container{
+    display: flex;
+    justify-content: flex-end;
+    width: fit-content;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+/* home section */
+
+.pizza_card{
+    margin: .5rem;
+    padding: .5rem;
+    border: 1px solid #efefef;
+
+}
+.pizza_name{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.pizza_desc{
+    opacity: 0.6;
+}
+.pizzaType{
+    position: absolute;
+    top: 1rem;
+}
+.price{
+    color: green;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+}
+.addToCardButn{
+   color: #efefef;
+   background-color: rgb(8, 101, 144);
+   font-size: 18px;
+  border: none;
+  padding: .2rem .5rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.addToCardButn:hover{
+    color: #fff;
+    background-color: #001010;
+
+}
+.priceNcart{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.selectDropDown{
+ padding: 0.3rem .5rem;
+ letter-spacing: 1px;
+ border: 1px solid #efefef;
+ border-radius: 3px;
+}
+
+/* // track order */
+
+.stage_card
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #efefef;
+    padding: 1rem 1rem;
+  flex-direction: row;
+    
+}
+@media screen and (max-width: 768px) {
+    .stage_card{
+        flex-direction: column;
+    }
+}
+.orderId_box{
+    font-size: 24px;
+    font-weight: 600;
+    margin:1rem 0;
+
+}
+.red{
+    color: red;
+}
+.time_S{
+    font-size: 14px;
+}
