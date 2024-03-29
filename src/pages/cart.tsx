@@ -152,7 +152,6 @@ const Cart = () => {
       </Grid>
       <Divider />
       <div className='cart_container'>
-        <h3>Total Price: Rs.17899</h3>
         <div>Total Orders: {cartList.length}</div>
         <div>payment mode : pay on conuter</div>
         {/* @ts-ignore */}
